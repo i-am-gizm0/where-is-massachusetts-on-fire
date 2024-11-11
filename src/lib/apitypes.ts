@@ -1,5 +1,8 @@
 export type Feature = {
 	attributes: FeatureAttributes;
+	geometry: {
+		rings: [x: number, y: number][][];
+	};
 	centroid: {
 		x: number;
 		y: number;
@@ -10,7 +13,7 @@ type FeatureAttributes = {
 	poly_IncidentName: string | null;
 	poly_GISAcres: number | null;
 	poly_Acres_AutoCalc: number | null;
-	poly_SourceGlobalID: string | null;
+	poly_SourceGlobalID: string;
 	poly_Source: string | null;
 	attr_CalculatedAcres: number | null;
 	attr_ContainmentDateTime: number | null;
@@ -28,7 +31,7 @@ type FeatureAttributes = {
 	attr_FireCauseSpecific: string | null;
 	attr_FireDiscoveryDateTime: number | null;
 	attr_FireStrategyConfinePercent: number | null;
-	attr_IncidentName: string | null;
+	attr_IncidentName: string;
 	attr_IncidentShortDescription: string | null;
 	attr_PercentContained: number | null;
 	attr_PercentPerimToBeContained: number | null;

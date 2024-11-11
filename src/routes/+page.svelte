@@ -1,7 +1,10 @@
 <script lang="ts">
+	import type { Feature } from '$lib/apitypes';
+	import Map from '$lib/Map.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+	let highlighted: Feature | undefined = $state();
 
 	function roundOrBlank(val: number | null) {
 		if (val == null) {
@@ -10,10 +13,19 @@
 			return Math.round(val);
 		}
 	}
+
+	function onFireClick(fire: Feature) {
+		return (event: Event) => {
+			event.preventDefault();
+			highlighted = fire;
+		};
+	}
 </script>
 
 <main>
-	<h1>Fires</h1>
+	<h1>
+		{data.fires.length} Fire{#if data.fires.length != 1}s{/if}
+	</h1>
 	{#if data.fires.length != 0}
 		<table>
 			<thead>
@@ -28,8 +40,11 @@
 				<tr><td></td></tr>
 				{#each data.fires as fire}
 					<tr>
-						<td class:unnamed={fire.attributes.attr_IncidentName?.startsWith('FD')}
-							>{fire.attributes.attr_IncidentName}</td
+						<td class:unnamed={fire.attributes.attr_IncidentName?.startsWith('FD')}>
+							<!-- svelte-ignore a11y_invalid_attribute -->
+							<a class="fire-name" href="#" onclick={onFireClick(fire)}
+								>{fire.attributes.attr_IncidentName}</a
+							></td
 						>
 						<td>{fire.attributes.attr_POOCounty}</td>
 						<td align="right">{roundOrBlank(fire.attributes.attr_IncidentSize)}</td>
@@ -45,6 +60,7 @@
 	{:else}
 		<i>No reported fires!</i>
 	{/if}
+	<Map fires={data.fires} {highlighted} />
 </main>
 
 <footer>
@@ -64,7 +80,10 @@
 		This site was heavily inspired by <a href="http://whereiscaliforniaonfire.com/"
 			>whereiscaliforniaonfire.com</a
 		>. <br />
-		<small>Contact: <a href="mailto:fire@gizm0.dev">fire@gizm0.dev</a></small>
+		<small
+			><a href="https://github.com/i-am-gizm0/where-is-massachusetts-on-fire">GitHub</a> | Contact:
+			<a href="mailto:fire@gizm0.dev">fire@gizm0.dev</a></small
+		>
 	</p>
 </footer>
 
@@ -73,7 +92,12 @@
 		font-family: Arial, sans-serif;
 	}
 
+	main {
+		display: inline-block;
+	}
+
 	table {
+		width: auto;
 		border-collapse: collapse;
 		table-layout: auto;
 		font-size: 24px;
@@ -98,8 +122,12 @@
 		font-weight: bolder;
 	}
 
+	a.fire-name {
+		color: inherit;
+		font-style: inherit;
+	}
+
 	.unnamed {
-		/* font-style: italic; */
 		color: #666;
 	}
 </style>
