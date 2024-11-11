@@ -51,14 +51,14 @@
 		}
 	};
 
-	$inspect(highlighted).with((type, feature) => {
-		if (type == 'init') {
-			return;
-		}
-		if (feature == undefined) {
-			resetZoom();
-		} else {
-			highlight(feature);
+	$effect(() => {
+		highlighted;
+		if (map) {
+			if (highlighted == undefined) {
+				resetZoom();
+			} else {
+				highlight(highlighted);
+			}
 		}
 	});
 
