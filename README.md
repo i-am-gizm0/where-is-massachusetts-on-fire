@@ -1,18 +1,12 @@
-# sv
+# whereismassachusettsonfire.com
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+![page screenshot](readme-screenshot.png) (basic page, as of 11/11/2024 at midnight)
 
-## Creating a project
+A simple site to track any active wildfires in Massachusetts, pulling data from NIFS.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Heavily inspired by [whereiscaliforniaonfire.com](whereiscaliforniaonfire.com), I've had this idea for a while and finally decided to make it during the [2024 fall historic drought](https://www.mass.gov/news/major-drought-declared-across-massachusetts) and the elevated fire risk it brought.
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
+---
 
 ## Developing
 
@@ -34,5 +28,3 @@ npm run build
 ```
 
 You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
