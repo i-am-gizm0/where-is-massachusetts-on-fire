@@ -1,0 +1,2 @@
+Allow: /
+Sitemap: https://whereismassachusettsonfire.com/sitemap.xml

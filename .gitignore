@@ -1,3 +1,8 @@
+# Copied Leaflet images (from build process)
+static/layers*
+static/marker*
+
+# Locally installed dependencies
 node_modules
 
 # Output
