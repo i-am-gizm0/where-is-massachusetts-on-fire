@@ -20,13 +20,19 @@
 			highlighted = fire;
 		};
 	}
+
+	const isOnFire = data.fires.length != 0;
+	const fireCountText = `${data.fires.length} Fire${data.fires.length != 1 ? 's' : ''}`;
 </script>
 
+<svelte:head>
+	<title>Where is Massachusetts on Fire?</title>
+	<meta name="description" content="Live Massachusetts wildfire tracker" />
+</svelte:head>
+
 <main>
-	<h1>
-		{data.fires.length} Fire{#if data.fires.length != 1}s{/if}
-	</h1>
-	{#if data.fires.length != 0}
+	<h1>{fireCountText}</h1>
+	{#if isOnFire}
 		<table>
 			<thead>
 				<tr>
